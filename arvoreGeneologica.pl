@@ -29,6 +29,7 @@ mae(X,Y):-progenitor(X,Y),sexo(X,femenino).
 pai(X,Y):-progenitor(X,Y),sexo(X,masculino).
 irma(X,Y):-mae(Z,X),mae(Z,Y);pai(K,X),pai(K,Y),X\==Y,sexo(X,femenino).
 irmao(X,Y):-mae(Z,Y),mae(Z,Y);pai(K,Y),pai(K,Y),X\==Y,sexo(X,masculino).
+tio(X,Y):-progenitor(Z,Y),irmao(Z,X),sexo(X,masculino).
 
 
 

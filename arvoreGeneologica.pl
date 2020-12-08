@@ -1,5 +1,6 @@
 
-/* Progenitores */
+/******* Factos ********/
+/******* Progenitores ****/
 
 progenitor(jose,joao).
 progenitor(jose,ana).
@@ -37,6 +38,8 @@ irmao(X,Y):-mae(Z,Y),mae(Z,Y);pai(K,Y),pai(K,Y),X\==Y,sexo(X,masculino).
 primo(X,Y):-progenitor(Z,X),progenitor(K,Y),irmao(Z,K),sexo(X,masculino).
 tio(X,Y):-progenitor(Z,Y),irmao(Z,X),sexo(X,masculino).
 
+sobrinha(X,Y):-progenitor(Z,X),irmao(Z,Y);irma(Z,Y),sexo(X,femenino).
+sobrinho(X,Y):-progenitor(Z,X),irmao(Z,Y);irma(Z,Y),sexo(X,masculino).
 
 
 

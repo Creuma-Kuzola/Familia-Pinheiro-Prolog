@@ -32,14 +32,23 @@ pai(X,Y):-progenitor(X,Y),sexo(X,masculino).
 filho(X,Y):-progenitor(Y,X),sexo(X,masculino).
 filha(X,Y):-progenitor(Y,X),sexo(X,femenino).
 
-irma(X,Y):-mae(Z,X),mae(Z,Y);pai(K,X),pai(K,Y),X\==Y,sexo(X,femenino).
-irmao(X,Y):-mae(Z,Y),mae(Z,Y);pai(K,Y),pai(K,Y),X\==Y,sexo(X,masculino).
+irma(X, Y) :- progenitor(Z, X), progenitor(Z, Y), sexo(X, femenino), X \== Y.
+irmao(X,Y):-progenitor(Z,X),progenitor(Z,Y), sexo(X,masculino), X \== Y.
 
-primo(X,Y):-progenitor(Z,X),progenitor(K,Y),irmao(Z,K),sexo(X,masculino).
-tio(X,Y):-progenitor(Z,Y),irmao(Z,X),sexo(X,masculino).
+primo(X,Y):-progenitor(Z,X),progenitor(K,Y),irmao(Z,K),sexo(X,masculino), X\==Y.
+tio(X,Y):-progenitor(Z,Y),irmao(X,Z),sexo(X,masculino).
+tia(X,Y):-progenitor(Z,Y),irma(X,Z),sexo(X,femenino).
 
 sobrinha(X,Y):-progenitor(Z,X),irmao(Z,Y);irma(Z,Y),sexo(X,femenino).
 sobrinho(X,Y):-progenitor(Z,X),irmao(Z,Y);irma(Z,Y),sexo(X,masculino).
 
+/*
+avô(X,Y):-pai(Z,Y);mae(Z,Y),pai(X,Z);mae(X,Z).
+avó(X,Y):-mae(Z,Y);pai(Z,Y),mae(X,Z);pai(X,Z).*/
 
+avô(X,Y):-progenitor(Z,Y),progenitor(X,Z),sexo(X,masculino).
+avó(X,Y):-progenitor(Z,Y),progenitor(X,Z),sexo(X,femenino).
+
+descendente(X,Y):-progenitor(Y,X).
+descendente(X,Y):-progenitor(Z,X),progenitor(Z,Y).
 

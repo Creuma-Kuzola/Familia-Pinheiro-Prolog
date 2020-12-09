@@ -42,13 +42,12 @@ tia(X,Y):-progenitor(Z,Y),irma(X,Z),sexo(X,femenino).
 sobrinha(X,Y):-progenitor(Z,X),irmao(Z,Y);irma(Z,Y),sexo(X,femenino).
 sobrinho(X,Y):-progenitor(Z,X),irmao(Z,Y);irma(Z,Y),sexo(X,masculino).
 
-/*
-avô(X,Y):-pai(Z,Y);mae(Z,Y),pai(X,Z);mae(X,Z).
-avó(X,Y):-mae(Z,Y);pai(Z,Y),mae(X,Z);pai(X,Z).*/
-
 avô(X,Y):-progenitor(Z,Y),progenitor(X,Z),sexo(X,masculino).
 avó(X,Y):-progenitor(Z,Y),progenitor(X,Z),sexo(X,femenino).
 
 descendente(X,Y):-progenitor(Y,X).
-descendente(X,Y):-progenitor(Z,X),progenitor(Z,Y).
+descendente(X,Y):-progenitor(Z,X),descendente(Z,Y).
+
+ascendente(X,Y):- progenitor(X,Y).
+ascendente(X,Y):-progenitor(Z,Y),ascendente(X,Z).
 
